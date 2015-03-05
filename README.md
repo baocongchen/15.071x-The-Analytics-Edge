@@ -17,7 +17,7 @@
 
  The course is organized by units. To keep pace with the class, you are expected to complete all the work by the due dates indicated. For individual due dates, see the course calendar or the left-hand side navigation in the Courseware tab. Weekly coursework includes:
 
-**Interactive Lecture Sequences;
-**Recitation;
-**Homework Assignment.
-**The course will also have a competition and a final exam.
+-Interactive Lecture Sequences;
+-Recitation;
+-Homework Assignment.
+-The course will also have a competition and a final exam.
