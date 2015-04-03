@@ -40,5 +40,6 @@ prp(CARTmodel)
 CARTmodel2 = rpart(voting ~ civicduty + hawthorne + self + neighbors, data=gerber, cp=0.0)
 prp(CARTmodel2)
 # Using only the CART tree plot, determine what fraction of "Civic Duty" people voted:
-
+CARTmodel2
+# 0.3145377 or 0.31 in the tree plot
 # Make a new tree that includes the "sex" variable, again with cp = 0.0. Notice that sex appears as a split that is of secondary importance to the treatment group.
