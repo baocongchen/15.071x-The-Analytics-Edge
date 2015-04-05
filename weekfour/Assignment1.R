@@ -42,4 +42,44 @@ prp(CARTmodel2)
 # Using only the CART tree plot, determine what fraction of "Civic Duty" people voted:
 CARTmodel2
 # 0.3145377 or 0.31 in the tree plot
-# Make a new tree that includes the "sex" variable, again with cp = 0.0. Notice that sex appears as a split that is of secondary importance to the treatment group.
+# Make a new tree that includes the "sex" variable, again with cp = 0.0. Notice that sex appears as a 
+# split that is of secondary importance to the treatment group.
+CARTmodel3 <- rpart(voting ~ civicduty + hawthorne + self + neighbors + sex, data=gerber, cp=0.0)
+prp(CARTmodel3)
+# In the control group, which gender is more likely to vote?
+# Use the graph or the result of CARTmodel3 (enter CARTmodel3 in the console) to get the answer
+# In the "Civic Duty" group, which gender is more likely to vote?
+# Use the graph or the result of CARTmodel3 (enter CARTmodel3 in the console) to get the answer
+#####################################
+
+# PROBLEM 3 - INTERACTION TERMS  
+# Let's just focus on the "Control" treatment group. Create a regression tree using just the "control" 
+# variable, then create another tree with the "control" and "sex" variables, both with cp=0.0.
+controlTree1 <- rpart(voting ~ control, data=gerber, cp=0.0)
+controlTree2 <- rpart(voting ~ control + sex, data=gerber, cp=0.0)
+# In the "control" only tree, what is the absolute value of the difference in the predicted probability of voting between 
+# being in the control group versus being in a different group? 
+prp(controlTree1, digits=6)
+# Answer based on the above graph
+# Now, using the second tree (with control and sex), determine who is affected more by NOT being in the 
+# control group (being in any of the four treatment groups):
+prp(controlTree2, digits=6)
+# Calculate the difference in the propotions of each sex being and not being in the control group, if the difference
+# is less than 0.001, we conclude that they're affected about the same 
+# Going back to logistic regression now, create a model using "sex" and "control". Interpret the coefficient for "sex":
+logisModel = glm(voting ~ sex + control, data=gerber, family="binomial")
+summary(logisModel)
+#  We see the coefficient for sex is negative which means women are less likely to vote
+Possibilities = data.frame(sex=c(0,0,1,1),control=c(0,1,0,1))
+predict(logisModel, newdata=Possibilities, type="response")
+# What is the absolute difference between the tree and the logistic regression for the (Woman, Control) case?
+# Answer based on the above results
+logisModel2 = glm(voting ~ sex + control + sex:control, data=gerber, family="binomial")
+summary(logisModel2)
+# How do you interpret the coefficient for the new variable in isolation? That is, how does it relate to the dependent variable?
+# The coefficient is negative, so a woman in a control group is less likely to vote
+predict(logisModel2, newdata=Possibilities, type="response")
+# What is the difference between the logistic regression model and the CART model for the (Woman, Control) case?
+# Answer based on the above functions
+# Should we always include all possible interaction terms of the independent variables when building a logistic regression model?
+# Think about issue like overfitting... 
