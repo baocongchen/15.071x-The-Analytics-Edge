@@ -29,7 +29,6 @@ table(clusters)
 1
 # Which cluster has the fewest observations?
 4
-subset
 tail(sort(colMeans(cluster1)))
 # What is the most frequent word in this cluster, in terms of average value?
 # Answer based on the above function
