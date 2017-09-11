@@ -76,10 +76,9 @@ CPS <- merge(CPS, CountryOfBirthCode, by.x="CountryOfBirthCode", by.y="Code", al
 sum(is.na(CPS$Country))
 # Among all interviewees born outside of North America, which country was the most common place of birth?
 sort(table(CPS$CountryOfBirthCode))
-newyork <- subset(CPS, CPS$MetroArea=="New York-Northern New Jersey-Long Island, NY-NJ-PA", na.rm=T)
 # What proportion of the interviewees from the "New York-Northern New Jersey-Long Island, NY-NJ-PA" metropolitan area have
 # a country of birth that is not the United States? 
-mean(newyork$Country!="United States", na.rm=T)
+ tapply(CPS$MetroArea=="New York-Northern New Jersey-Long Island, NY-NJ-PA" , CPS$Country.y != "United States" , mean, na.rm = TRUE)
 # Which metropolitan area has the largest number (note -- not proportion) of interviewees with a country of birth in India?
 sort(tapply(CPS$Country=="India", CPS$MetroArea, sum, na.rm=T))
 # in Brazil
